@@ -17,14 +17,20 @@ class Game {
   }
 
   registerEvents() {
-    /*
-      TODO:
-      Написать обработчик события, который откликается
-      на каждый введённый символ.
-      В случае правильного ввода слова вызываем this.success()
-      При неправильном вводе символа - this.fail();
-      DOM-элемент текущего символа находится в свойстве this.currentSymbol.
-     */
+    let onKeydown = (e) => {
+      const currentCode = this.currentSymbol.textContent.toLowerCase().charCodeAt(0);
+
+      if (e.key === 'Control' || e.key === 'Alt' || e.key === 'Shift') {
+        return;
+      }
+      
+      if (currentCode === e.key.toLowerCase().charCodeAt(0)) {
+        this.success();
+      } else {
+        this.fail();
+      }
+    }
+    document.addEventListener('keydown', onKeydown);
   }
 
   success() {
